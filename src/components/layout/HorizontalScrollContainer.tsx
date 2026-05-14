@@ -62,8 +62,7 @@ export default function HorizontalScrollContainer({ children, isReady }: Props) 
     <div ref={containerRef} className="min-h-screen w-full overflow-x-hidden md:overflow-hidden bg-[#050505] relative">
       <div 
         ref={scrollRef} 
-        className="scroll-content-inner h-auto md:h-full w-full md:w-max flex flex-col md:flex-row items-start md:items-center relative z-10"
-        style={{ transform: typeof window !== 'undefined' && window.innerWidth < 768 ? 'translateX(0) !important' : undefined }}
+        className="scroll-content-inner h-auto md:h-full w-full md:w-max flex flex-col md:flex-row items-start md:items-center relative z-10 mobile-stack-fix"
       >
         {children}
       </div>

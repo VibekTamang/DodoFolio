@@ -51,7 +51,7 @@ export default function Outro() {
   return (
     <section 
       ref={sectionRef}
-      className="relative w-screen h-screen flex flex-col justify-center items-center px-10 md:px-24 shrink-0 overflow-hidden border-x border-[#222]"
+      className="relative w-full md:w-screen min-h-screen flex flex-col justify-center items-center px-10 md:px-24 shrink-0 overflow-hidden border-x border-[#222] section-mobile-fix"
     >
       <div className="relative z-10 w-full max-w-6xl text-center flex flex-col items-center gap-8">
         <h2 

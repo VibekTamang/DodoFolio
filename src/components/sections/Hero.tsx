@@ -6,7 +6,7 @@ interface HeroProps {
 
 export default function Hero({ onOpenResume }: HeroProps) {
   return (
-    <section className="relative w-full md:w-screen min-h-screen flex flex-col justify-center px-6 md:px-24 shrink-0 border-b md:border-b-0 md:border-r border-[#222] overflow-hidden">
+    <section className="relative w-full md:w-screen min-h-screen flex flex-col justify-center px-6 md:px-24 shrink-0 border-b md:border-b-0 md:border-r border-[#222] overflow-hidden section-mobile-fix">
       {/* Portrait Background */}
       <div className="absolute inset-0 z-0 pointer-events-none flex justify-end items-end md:items-center">
         <div 

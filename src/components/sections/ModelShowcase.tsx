@@ -61,7 +61,7 @@ export default function ModelShowcase() {
 
   return (
     <section
-      className="relative w-full md:w-screen min-h-screen py-24 md:py-0 flex shrink-0 overflow-hidden border-b md:border-b-0 md:border-r border-[#222] bg-[#050505]"
+      className="relative w-full md:w-screen min-h-screen py-24 md:py-0 flex shrink-0 overflow-hidden border-b md:border-b-0 md:border-r border-[#222] bg-[#050505] section-mobile-fix"
     >
       {/* ── 05 Watermark ── */}
       <div className="absolute top-1/2 right-4 md:right-20 -translate-y-1/2 text-[15vw] xl:text-[20vw] font-black opacity-5 tracking-tighter pointer-events-none z-0">

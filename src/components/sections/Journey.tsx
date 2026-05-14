@@ -39,7 +39,7 @@ export default function Journey() {
 
   return (
     <section 
-      className="w-full md:w-[120vw] min-h-screen py-20 md:py-0 flex flex-col justify-center px-6 md:px-24 shrink-0 relative group overflow-hidden"
+      className="w-full md:w-[120vw] min-h-screen py-20 md:py-0 flex flex-col justify-center px-6 md:px-24 shrink-0 relative group overflow-hidden section-mobile-fix"
       style={{
         borderRight: '1px solid',
         borderBottom: typeof window !== 'undefined' && window.innerWidth < 768 ? '1px solid' : 'none',

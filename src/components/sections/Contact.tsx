@@ -41,7 +41,7 @@ export default function Contact({ onOpenResume }: ContactProps) {
   return (
     <section 
       ref={sectionRef}
-      className="relative w-screen h-screen shrink-0 bg-[#0a0a0a] border-l border-[#222] overflow-hidden flex flex-col md:flex-row"
+      className="relative w-full md:w-screen min-h-screen shrink-0 bg-[#0a0a0a] border-l border-[#222] overflow-hidden flex flex-col md:flex-row section-mobile-fix"
     >
       {/* ── Left Side: Massive Typography ── */}
       <div className="flex-1 flex flex-col justify-center px-10 md:px-20 relative z-10">

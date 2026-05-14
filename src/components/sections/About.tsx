@@ -1,6 +1,6 @@
 export default function About() {
   return (
-    <section className="w-full md:w-[120vw] min-h-screen flex flex-col md:flex-row items-start md:items-center justify-start gap-12 md:gap-20 py-24 md:py-0 px-6 md:px-24 shrink-0 border-b md:border-b-0 md:border-r border-[#222] relative group overflow-hidden">
+    <section className="w-full md:w-[120vw] min-h-screen flex flex-col md:flex-row items-start md:items-center justify-start gap-12 md:gap-20 py-24 md:py-0 px-6 md:px-24 shrink-0 border-b md:border-b-0 md:border-r border-[#222] relative group overflow-hidden section-mobile-fix">
       <div className="flex flex-col gap-8 md:gap-16 w-full max-w-6xl relative z-10 mt-8 md:mt-20">
         
         {/* Profile (First Row) */}

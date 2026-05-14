@@ -22,7 +22,7 @@ export default function Projects() {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <section className="w-full md:w-[130vw] min-h-screen py-20 md:py-0 flex flex-col md:flex-row items-start md:items-center justify-start px-6 md:px-24 shrink-0 border-b md:border-b-0 md:border-r border-[#222] relative group overflow-hidden">
+    <section className="w-full md:w-[130vw] min-h-screen py-20 md:py-0 flex flex-col md:flex-row items-start md:items-center justify-start px-6 md:px-24 shrink-0 border-b md:border-b-0 md:border-r border-[#222] relative group overflow-hidden section-mobile-fix">
       <div className="flex flex-col justify-center w-full max-w-full md:max-w-[75vw]">
       <div className="flex justify-between items-end mb-16">
         <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter">
