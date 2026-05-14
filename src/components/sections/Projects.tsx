@@ -22,7 +22,7 @@ export default function Projects() {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <section className="w-full md:w-[130vw] min-h-screen py-20 md:py-0 flex flex-col md:flex-row items-center justify-start px-6 md:px-24 shrink-0 border-b md:border-b-0 md:border-r border-[#222] relative group">
+    <section className="w-screen md:w-[130vw] min-h-screen py-20 md:py-0 flex flex-col md:flex-row items-center justify-start px-6 md:px-24 shrink-0 border-b md:border-b-0 md:border-r border-[#222] relative group">
       <div className="flex flex-col justify-center w-full max-w-full md:max-w-[75vw]">
       <div className="flex justify-between items-end mb-16">
         <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter">
@@ -39,7 +39,7 @@ export default function Projects() {
             key={project.id}
             onMouseEnter={() => setHovered(project.id)}
             onMouseLeave={() => setHovered(null)}
-            className={`relative border border-white transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden bg-[#050505] cursor-pointer min-h-[300px] md:min-h-0
+            className={`relative border border-white transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden bg-[#050505] cursor-pointer min-h-[400px] md:min-h-0 w-full md:w-auto
               ${hovered === project.id ? 'md:flex-[3]' : hovered === null ? 'md:flex-1' : 'md:flex-[0.5]'}`}
           >
             {/* Background Image Logic */}

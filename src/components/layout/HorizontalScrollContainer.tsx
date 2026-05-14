@@ -62,7 +62,7 @@ export default function HorizontalScrollContainer({ children, isReady }: Props) 
     <div ref={containerRef} className="min-h-screen w-full overflow-x-hidden md:overflow-hidden bg-transparent relative">
       <div 
         ref={scrollRef} 
-        className="scroll-content-inner h-auto md:h-full w-full md:w-max flex flex-col md:flex-row items-start md:items-center relative z-10"
+        className="scroll-content-inner h-auto md:h-full w-screen md:w-max flex flex-col md:flex-row items-start md:items-center relative z-10"
       >
         {children}
       </div>
