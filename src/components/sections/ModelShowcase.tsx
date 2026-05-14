@@ -1,11 +1,5 @@
 "use client";
-import { useState, useCallback } from "react";
-
-const FRAME_W = 380; // px — width of the fixed dashed frame / active card
-const FRAME_H = 520; // px — height of the active card
-const THUMB_W = 160; // px — width of non-active (thumbnail) cards
-const THUMB_H = 300; // px — height of non-active cards
-const GAP     = 20;  // px — gap between cards in the strip
+import { useState, useCallback, useEffect } from "react";
 
 interface Slide {
   img: string;
@@ -21,6 +15,40 @@ const SLIDES: Slide[] = [
 
 export default function ModelShowcase() {
   const [current, setCurrent] = useState(0);
+  const [dims, setDims] = useState({
+    frameW: 380,
+    frameH: 520,
+    thumbW: 160,
+    thumbH: 300,
+    gap: 20
+  });
+
+  useEffect(() => {
+    const updateDims = () => {
+      const isMobile = window.innerWidth < 768;
+      if (isMobile) {
+        setDims({
+          frameW: window.innerWidth * 0.8,
+          frameH: (window.innerWidth * 0.8) * 1.3,
+          thumbW: 100,
+          thumbH: 150,
+          gap: 10
+        });
+      } else {
+        setDims({
+          frameW: 380,
+          frameH: 520,
+          thumbW: 160,
+          thumbH: 300,
+          gap: 20
+        });
+      }
+    };
+
+    updateDims();
+    window.addEventListener("resize", updateDims);
+    return () => window.removeEventListener("resize", updateDims);
+  }, []);
 
   const goTo = useCallback((idx: number) => {
     setCurrent(((idx % SLIDES.length) + SLIDES.length) % SLIDES.length);
@@ -29,58 +57,52 @@ export default function ModelShowcase() {
   const prev = () => goTo(current - 1);
   const next = () => goTo(current + 1);
 
-  // Strip translate:
-  // Cards before current are THUMB_W wide; card[current] is FRAME_W wide.
-  // Left edge of card[current] = current * (THUMB_W + GAP)
-  // We center it: stripX = -(left_of_current + FRAME_W / 2)
-  const stripX = -(current * (THUMB_W + GAP) + FRAME_W / 2);
+  const stripX = -(current * (dims.thumbW + dims.gap) + dims.frameW / 2);
 
   return (
     <section
-      className="relative w-screen h-screen flex shrink-0 overflow-hidden border-r border-[#222] bg-[#050505]"
+      className="relative w-full md:w-screen min-h-screen py-24 md:py-0 flex shrink-0 overflow-hidden border-b md:border-b-0 md:border-r border-[#222] bg-[#050505]"
     >
       {/* ── 05 Watermark ── */}
-      <div className="absolute top-1/2 right-20 -translate-y-1/2 text-[15vw] xl:text-[20vw] font-black opacity-5 tracking-tighter pointer-events-none z-0">
+      <div className="absolute top-1/2 right-4 md:right-20 -translate-y-1/2 text-[15vw] xl:text-[20vw] font-black opacity-5 tracking-tighter pointer-events-none z-0">
         05
       </div>
 
       {/* ── Overlaid text — pinned to left ── */}
       <div
-        className="absolute left-10 md:left-16 z-30 flex flex-col justify-center h-full pointer-events-none"
+        className="absolute left-6 md:left-16 top-10 md:top-0 z-30 flex flex-col justify-center h-auto md:h-full pointer-events-none"
         style={{ width: "220px" }}
       >
-        <span className="text-xs uppercase tracking-widest text-white/30 font-medium mb-4">
+        <span className="text-[10px] md:text-xs uppercase tracking-widest text-white/30 font-medium mb-2 md:mb-4">
           Domains of Work
         </span>
-        <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter leading-none text-white/50">
+        <h2 className="text-3xl md:text-6xl font-bold uppercase tracking-tighter leading-none text-white/50">
           SO
         </h2>
-        <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none text-white">
+        <h2 className="text-3xl md:text-6xl font-black uppercase tracking-tighter leading-none text-white">
           IMMERSIVE
         </h2>
-        <p className="text-sm md:text-base font-light text-white/50 mt-4 leading-relaxed">
+        <p className="text-xs md:text-base font-light text-white/50 mt-2 md:mt-4 leading-relaxed">
           Every field explored with full depth.
         </p>
       </div>
 
-      {/* ── Left edge fade ── */}
+      {/* ── Edges fade ── */}
       <div
-        className="absolute left-0 top-0 bottom-0 z-20 pointer-events-none"
+        className="absolute left-0 top-0 bottom-0 z-20 pointer-events-none hidden md:block"
         style={{ width: "320px", background: "linear-gradient(to right, #050505 40%, transparent 100%)" }}
       />
-
-      {/* ── Right edge fade ── */}
       <div
         className="absolute right-0 top-0 bottom-0 z-20 pointer-events-none"
-        style={{ width: "160px", background: "linear-gradient(to left, #050505 0%, transparent 100%)" }}
+        style={{ width: "100px md:160px", background: "linear-gradient(to left, #050505 0%, transparent 100%)" }}
       />
 
       {/* ── Fixed dashed frame — centered on page ── */}
       <div
         className="absolute z-10 pointer-events-none"
         style={{
-          width:     `${FRAME_W}px`,
-          height:    `${FRAME_H}px`,
+          width:     `${dims.frameW}px`,
+          height:    `${dims.frameH}px`,
           top:       "50%",
           left:      "50%",
           transform: "translate(-50%, -50%)",
@@ -88,51 +110,29 @@ export default function ModelShowcase() {
         }}
       />
 
-      {/* ── Nav buttons — anchored below the frame ── */}
+      {/* ── Nav buttons ── */}
       <div
         className="absolute z-30 flex gap-2"
         style={{
-          top:       `calc(50% + ${FRAME_H / 2}px + 24px)`,
+          top:       `calc(50% + ${dims.frameH / 2}px + 24px)`,
           left:      "50%",
           transform: "translateX(-50%)",
         }}
       >
-        <button
-          onClick={prev}
-          aria-label="Previous"
-          className="w-9 h-9 flex items-center justify-center rounded-lg transition-colors hover:bg-white/20"
-          style={{
-            background:    "rgba(0,0,0,0.6)",
-            border:        "1px solid rgba(255,255,255,0.16)",
-            backdropFilter:"blur(10px)",
-          }}
-        >
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round">
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
+        <button onClick={prev} className="w-9 h-9 flex items-center justify-center rounded-lg bg-black/60 border border-white/10 backdrop-blur-md">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><path d="M15 18l-6-6 6-6" /></svg>
         </button>
-        <button
-          onClick={next}
-          aria-label="Next"
-          className="w-9 h-9 flex items-center justify-center rounded-lg transition-colors hover:bg-white/20"
-          style={{
-            background:    "rgba(0,0,0,0.6)",
-            border:        "1px solid rgba(255,255,255,0.16)",
-            backdropFilter:"blur(10px)",
-          }}
-        >
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round">
-            <path d="M9 18l6-6-6-6" />
-          </svg>
+        <button onClick={next} className="w-9 h-9 flex items-center justify-center rounded-lg bg-black/60 border border-white/10 backdrop-blur-md">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><path d="M9 18l6-6-6-6" /></svg>
         </button>
       </div>
 
-      {/* ── Caption bar — anchored to bottom of the frame ── */}
+      {/* ── Caption bar ── */}
       <div
         className="absolute z-30 flex items-center gap-3 px-4 py-3"
         style={{
-          width:         `${FRAME_W}px`,
-          bottom:        `calc(50% - ${FRAME_H / 2}px)`,
+          width:         `${dims.frameW}px`,
+          bottom:        `calc(50% - ${dims.frameH / 2}px)`,
           left:          "50%",
           transform:     "translateX(-50%)",
           background:    "rgba(0,0,0,0.82)",
@@ -141,90 +141,48 @@ export default function ModelShowcase() {
           pointerEvents: "none",
         }}
       >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
-          <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
-          <line x1="12" y1="9" x2="12" y2="13" />
-          <line x1="12" y1="17" x2="12.01" y2="17" />
-        </svg>
-        <p className="text-[9px] font-bold text-white uppercase tracking-[0.18em] leading-none">
+        <p className="text-[8px] md:text-[9px] font-bold text-white uppercase tracking-[0.18em] leading-none">
           {SLIDES[current].caption}
         </p>
       </div>
 
-      {/* ── The sliding filmstrip ── */}
-      {/*
-        Positioned: left=50% so strip's left edge = viewport center
-        translateX = stripX which centers card[current] under the frame
-      */}
+      {/* ── Sliding filmstrip ── */}
       <div
         className="absolute top-1/2 flex items-center"
         style={{
           left:      "50%",
           transform: `translate(${stripX}px, -50%)`,
           transition:"transform 0.65s cubic-bezier(0.22, 1, 0.36, 1)",
-          gap:       `${GAP}px`,
+          gap:       `${dims.gap}px`,
         }}
       >
         {SLIDES.map((slide, i) => (
           <div
             key={i}
             onClick={() => goTo(i)}
-            className="relative shrink-0"
+            className="relative shrink-0 overflow-hidden"
             style={{
-              width:      i === current ? `${FRAME_W}px` : `${THUMB_W}px`,
-              height:     i === current ? `${FRAME_H}px` : `${THUMB_H}px`,
+              width:      i === current ? `${dims.frameW}px` : `${dims.thumbW}px`,
+              height:     i === current ? `${dims.frameH}px` : `${dims.thumbH}px`,
               cursor:     i === current ? "default" : "pointer",
               opacity:    i === current ? 1 : 0.38,
-              transition: "width 0.55s cubic-bezier(0.22,1,0.36,1), height 0.55s cubic-bezier(0.22,1,0.36,1), opacity 0.5s ease",
-              flexShrink: 0,
-              overflow: "hidden",
+              transition: "all 0.55s cubic-bezier(0.22,1,0.36,1)",
             }}
           >
-            <img
-              src={slide.img}
-              alt={`Slide ${i + 1}`}
-              className="w-full h-full object-cover"
-              draggable={false}
-              style={{
-                // When this card just became active, run the zoom-in animation
-                animation: i === current ? "frameIn 0.6s cubic-bezier(0.22,1,0.36,1) forwards" : "none",
-              }}
-              key={i === current ? `active-${current}` : `thumb-${i}`}
-            />
+            <img src={slide.img} className="w-full h-full object-cover" />
           </div>
         ))}
       </div>
 
       {/* ── Dot indicators ── */}
-      <div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-3"
-      >
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-3">
         <div className="flex items-center gap-2">
           {SLIDES.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goTo(i)}
-              aria-label={`Slide ${i + 1}`}
-              className="rounded-full transition-all duration-300"
-              style={{
-                width:      i === current ? "22px" : "6px",
-                height:     "6px",
-                background: i === current ? "white" : "rgba(255,255,255,0.2)",
-              }}
-            />
+            <button key={i} onClick={() => goTo(i)} className="rounded-full transition-all duration-300"
+              style={{ width: i === current ? "22px" : "6px", height: "6px", background: i === current ? "white" : "rgba(255,255,255,0.2)" }} />
           ))}
         </div>
-        <p className="text-[9px] uppercase tracking-[0.35em] text-white/20">
-          {String(current + 1).padStart(2, "0")} / {String(SLIDES.length).padStart(2, "0")}
-        </p>
       </div>
-
-      <style>{`
-        @keyframes frameIn {
-          0%   { transform: scale(0.94); }
-          100% { transform: scale(1);    }
-        }
-      `}</style>
     </section>
   );
 }

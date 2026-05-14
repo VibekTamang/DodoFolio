@@ -1,6 +1,6 @@
 export default function Skills() {
   return (
-    <section className="w-screen md:w-[120vw] h-screen flex flex-row items-center justify-start gap-20 px-10 md:px-24 shrink-0 relative group border-r border-[#222]">
+    <section className="w-full md:w-[120vw] min-h-screen py-24 md:py-0 flex flex-col md:flex-row items-center justify-start gap-12 md:gap-20 px-6 md:px-24 shrink-0 relative group border-b md:border-b-0 md:border-r border-[#222]">
       <div className="max-w-6xl w-full z-10 mix-blend-difference flex flex-col md:flex-row gap-16">
           <div className="flex-1">
             <h2 className="text-5xl md:text-8xl font-black mb-8 uppercase tracking-tighter text-white">

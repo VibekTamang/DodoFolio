@@ -39,9 +39,10 @@ export default function Journey() {
 
   return (
     <section 
-      className="w-[200vw] md:w-[120vw] h-screen flex flex-col justify-center px-10 md:px-24 shrink-0 relative group overflow-hidden"
+      className="w-full md:w-[120vw] min-h-screen py-20 md:py-0 flex flex-col justify-center px-6 md:px-24 shrink-0 relative group overflow-hidden"
       style={{
         borderRight: '1px solid',
+        borderBottom: typeof window !== 'undefined' && window.innerWidth < 768 ? '1px solid' : 'none',
         borderImageSource: 'linear-gradient(to bottom, #000, #1a0a08)',
         borderImageSlice: 1
       }}

@@ -212,7 +212,7 @@ export default function RadialNav() {
 
           {/* Wheel Container - Balanced Bulge Geometry */}
           <div 
-            className="absolute top-1/2 left-[-1450px]"
+            className="absolute top-1/2 left-[-1550px] md:left-[-1450px]"
             style={{ width: '1700px', height: '1700px', marginTop: '-850px' }}
           >
             <div 
@@ -240,16 +240,16 @@ export default function RadialNav() {
                       className="absolute cursor-pointer"
                       onClick={() => handleNavClick(item.offset)}
                       style={{ 
-                        transform: 'translateX(780px) translateY(-50%)' 
+                        transform: 'translateX(760px) md:translateX(780px) translateY(-50%)' 
                       }}
                     >
-                      <div className={`flex items-center gap-6 ${isActive ? 'opacity-100' : 'opacity-40'} transition-all duration-300 ease-out group`}>
+                      <div className={`flex items-center gap-4 md:gap-6 ${isActive ? 'opacity-100' : 'opacity-40'} transition-all duration-300 ease-out group`}>
                         
                         {/* Number */}
                         <span className={`font-black uppercase tracking-tighter transition-all duration-300 origin-left ${
                           isActive 
-                            ? 'text-6xl leading-none text-white ml-2 scale-110' 
-                            : 'text-5xl text-white/30 ml-0 group-hover:text-white group-hover:scale-[1.1] group-hover:ml-4'
+                            ? 'text-4xl md:text-6xl leading-none text-white ml-2 scale-110' 
+                            : 'text-3xl md:text-5xl text-white/30 ml-0 group-hover:text-white group-hover:scale-[1.1] group-hover:ml-4'
                         }`}>
                           {item.id}
                         </span>

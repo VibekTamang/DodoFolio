@@ -23,37 +23,46 @@ export default function HorizontalScrollContainer({ children, isReady }: Props) 
 
     if (!container || !scrollContent) return;
 
-    // We calculate how much to scroll based on the total width minus viewport width
-    const getScrollAmount = () => {
-      const containerWidth = scrollContent.scrollWidth;
-      return -(containerWidth - window.innerWidth);
-    };
+    let mm = gsap.matchMedia();
 
-    const tween = gsap.to(scrollContent, {
-      x: getScrollAmount,
-      ease: "none",
-      scrollTrigger: {
-        trigger: container,
-        start: "top top",
-        end: () => `+=${scrollContent.scrollWidth - window.innerWidth}`,
-        pin: true,
-        scrub: true,
-        invalidateOnRefresh: true,
-        anticipatePin: 1,
-      },
+    mm.add("(min-width: 768px)", () => {
+      // DESKTOP: Horizontal Scroll
+      const getScrollAmount = () => {
+        const containerWidth = scrollContent.scrollWidth;
+        return -(containerWidth - window.innerWidth);
+      };
+
+      const tween = gsap.to(scrollContent, {
+        x: getScrollAmount,
+        ease: "none",
+        scrollTrigger: {
+          trigger: container,
+          start: "top top",
+          end: () => `+=${scrollContent.scrollWidth - window.innerWidth}`,
+          pin: true,
+          scrub: true,
+          invalidateOnRefresh: true,
+          anticipatePin: 1,
+        },
+      });
+
+      return () => {
+        tween.kill();
+      };
     });
 
+    // MOBILE: Natural vertical scroll (no extra logic needed here, CSS handles it)
+
     return () => {
-      tween.kill();
-      ScrollTrigger.getAll().forEach(t => t.kill());
+      mm.revert();
     };
   }, [isReady]);
 
   return (
-    <div ref={containerRef} className="h-screen w-full overflow-hidden bg-transparent relative">
+    <div ref={containerRef} className="min-h-screen w-full overflow-x-hidden md:overflow-hidden bg-transparent relative">
       <div 
         ref={scrollRef} 
-        className="scroll-content-inner h-full w-max flex flex-row items-center relative z-10"
+        className="scroll-content-inner h-auto md:h-full w-full md:w-max flex flex-col md:flex-row items-start md:items-center relative z-10"
       >
         {children}
       </div>
