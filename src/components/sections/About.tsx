@@ -1,14 +1,14 @@
 export default function About() {
   return (
     <section className="w-full md:w-[120vw] min-h-screen flex flex-col md:flex-row items-center justify-start gap-12 md:gap-20 py-24 md:py-0 px-6 md:px-24 shrink-0 border-b md:border-b-0 md:border-r border-[#222] relative group">
-      <div className="flex flex-col gap-12 md:gap-16 w-full max-w-6xl relative z-10 mt-12 md:mt-20">
+      <div className="flex flex-col gap-8 md:gap-16 w-full max-w-6xl relative z-10 mt-8 md:mt-20">
         
         {/* Profile (First Row) */}
         <div className="w-full">
-          <h2 className="text-3xl md:text-5xl font-medium mb-10 uppercase tracking-[0.3em] text-white/60">
+          <h2 className="text-2xl md:text-5xl font-medium mb-6 md:mb-10 uppercase tracking-[0.3em] text-white/60">
             Profile
           </h2>
-          <p className="text-sm md:text-lg leading-relaxed font-normal text-gray-400 max-w-4xl">
+          <p className="text-xs md:text-lg leading-relaxed font-normal text-gray-400 max-w-4xl pr-4">
             Detail-oriented and results-driven Computer Science student specializing in Artificial Intelligence, Machine Learning, and Cybersecurity. Experienced in developing AI-driven applications, implementing deep learning models, and simulating real-world cybersecurity vulnerabilities. Strong foundation in system design, API integration, and full-stack development with a focus on building scalable and efficient solutions. Seeking opportunities to apply technical expertise in real-world environments and contribute to innovative projects.
           </p>
         </div>

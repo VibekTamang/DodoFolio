@@ -3,7 +3,7 @@ export default function Skills() {
     <section className="w-full md:w-[120vw] min-h-screen py-24 md:py-0 flex flex-col md:flex-row items-center justify-start gap-12 md:gap-20 px-6 md:px-24 shrink-0 relative group border-b md:border-b-0 md:border-r border-[#222]">
       <div className="max-w-6xl w-full z-10 mix-blend-difference flex flex-col md:flex-row gap-16">
           <div className="flex-1">
-            <h2 className="text-5xl md:text-8xl font-black mb-8 uppercase tracking-tighter text-white">
+            <h2 className="text-4xl md:text-8xl font-black mb-8 uppercase tracking-tighter text-white">
               System Core
             </h2>
             <div className="flex flex-wrap gap-3 text-xs md:text-sm uppercase tracking-widest font-medium mb-12">

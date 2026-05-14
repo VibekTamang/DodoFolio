@@ -26,7 +26,7 @@ export default function Hero({ onOpenResume }: HeroProps) {
       </div>
 
       <div className="relative z-10 w-full max-w-5xl">
-        <h1 className="text-7xl md:text-[9vw] font-black tracking-tighter leading-[0.85] uppercase break-words w-full">
+        <h1 className="text-6xl md:text-[9vw] font-black tracking-tighter leading-[0.85] uppercase break-words w-full">
           Vibek<br />
           <span style={{ WebkitTextStroke: '1px white', color: 'transparent' }} >Tamang</span>
         </h1>
@@ -55,9 +55,9 @@ export default function Hero({ onOpenResume }: HeroProps) {
       </div>
 
       {/* Ghost Typography Layer - Revealed by Spotlight */}
-      <div className="absolute left-24 bottom-1/4 z-0 pointer-events-none select-none">
+      <div className="absolute left-10 md:left-24 bottom-1/4 z-0 pointer-events-none select-none">
         <h2 
-          className="text-[25vw] font-black leading-none opacity-[0.03] uppercase"
+          className="text-[40vw] md:text-[25vw] font-black leading-none opacity-[0.03] uppercase"
           style={{ WebkitTextStroke: '2px white', color: 'transparent' }}
         >
           Dodo

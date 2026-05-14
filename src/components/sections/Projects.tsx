@@ -23,7 +23,7 @@ export default function Projects() {
 
   return (
     <section className="w-full md:w-[130vw] min-h-screen py-20 md:py-0 flex flex-col md:flex-row items-center justify-start px-6 md:px-24 shrink-0 border-b md:border-b-0 md:border-r border-[#222] relative group">
-      <div className="flex flex-col justify-center w-full max-w-[75vw]">
+      <div className="flex flex-col justify-center w-full max-w-full md:max-w-[75vw]">
       <div className="flex justify-between items-end mb-16">
         <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter">
           Projects
@@ -70,7 +70,7 @@ export default function Projects() {
               
               <div className={`transform transition-transform duration-500 ${hovered === project.id ? 'translate-y-0' : 'translate-y-4'}`}>
                 <h3 className={`font-black uppercase tracking-tighter transition-all duration-500 
-                  ${hovered === project.id ? 'text-4xl md:text-6xl text-white' : 'text-2xl text-white/50'}`}>
+                  ${hovered === project.id ? 'text-3xl md:text-6xl text-white' : 'text-xl md:text-2xl text-white/50'}`}>
                   {project.title}
                 </h3>
                 
