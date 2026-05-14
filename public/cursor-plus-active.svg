@@ -1,0 +1,6 @@
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <!-- Black outline for visibility -->
+  <path d="M12 0V24M0 12H24" stroke="black" stroke-width="3" stroke-linecap="round"/>
+  <!-- Thinner, longer white inner plus -->
+  <path d="M12 1V23M1 12H23" stroke="white" stroke-width="1" stroke-linecap="round"/>
+</svg>
