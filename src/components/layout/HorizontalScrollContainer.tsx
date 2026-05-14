@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
@@ -58,11 +58,29 @@ export default function HorizontalScrollContainer({ children, isReady }: Props) 
     };
   }, [isReady]);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  if (isMobile) {
+    return (
+      <div className="flex flex-col w-full bg-black relative z-10">
+        {children}
+      </div>
+    );
+  }
+
   return (
-    <div ref={containerRef} className="min-h-screen w-full overflow-x-hidden md:overflow-hidden bg-[#050505] relative">
+    <div ref={containerRef} className="h-screen w-full overflow-hidden bg-black relative">
       <div 
         ref={scrollRef} 
-        className="scroll-content-inner h-auto md:h-full w-full md:w-max flex flex-col md:flex-row items-start md:items-center relative z-10 mobile-stack-fix"
+        className="scroll-content-inner h-full w-max flex flex-row items-center relative z-10"
       >
         {children}
       </div>
