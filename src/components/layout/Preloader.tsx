@@ -34,11 +34,11 @@ export default function Preloader({ onComplete }: PreloaderProps) {
 
       if (hasVisited) {
         // --- SECONDARY VISIT: Simple Fast Loading Animation ---
-        gsap.set(containerRef.current, { opacity: 1 });
-        gsap.set(logoContainerRef.current, { display: "none" });
-        gsap.set(gridRef.current, { display: "none" });
-        gsap.set(sweepRef.current, { display: "none" });
-        gsap.set(simpleLoaderRef.current, { opacity: 0, display: "flex", y: 20 });
+        if (containerRef.current) gsap.set(containerRef.current, { opacity: 1 });
+        if (logoContainerRef.current) gsap.set(logoContainerRef.current, { display: "none" });
+        if (gridRef.current) gsap.set(gridRef.current, { display: "none" });
+        if (sweepRef.current) gsap.set(sweepRef.current, { display: "none" });
+        if (simpleLoaderRef.current) gsap.set(simpleLoaderRef.current, { opacity: 0, display: "flex", y: 20 });
         
         tl.to(simpleLoaderRef.current, {
           opacity: 1,
@@ -60,22 +60,24 @@ export default function Preloader({ onComplete }: PreloaderProps) {
         });
       } else {
         // --- FIRST VISIT: Cinematic Logo Animation ---
-        gsap.set(simpleLoaderRef.current, { display: "none" });
-        gsap.set(containerRef.current, { opacity: 1 });
-        gsap.set(logoContainerRef.current, { opacity: 1 });
+        if (simpleLoaderRef.current) gsap.set(simpleLoaderRef.current, { display: "none" });
+        if (containerRef.current) gsap.set(containerRef.current, { opacity: 1 });
+        if (logoContainerRef.current) gsap.set(logoContainerRef.current, { opacity: 1 });
 
         const circle = circleRef.current;
         const length = circle ? circle.getTotalLength() : 1500;
         
-        gsap.set(markTopRef.current, { transformOrigin: "50% 50%", y: -150, opacity: 0, scale: 0.8 });
-        gsap.set(markBottomRef.current, { transformOrigin: "50% 50%", y: 150, opacity: 0, scale: 0.8 });
+        if (markTopRef.current) gsap.set(markTopRef.current, { transformOrigin: "50% 50%", y: -150, opacity: 0, scale: 0.8 });
+        if (markBottomRef.current) gsap.set(markBottomRef.current, { transformOrigin: "50% 50%", y: 150, opacity: 0, scale: 0.8 });
         
-        gsap.set(circleRef.current, { 
-            strokeDasharray: length, 
-            strokeDashoffset: length,
-            transformOrigin: "50% 50%",
-            rotation: -90
-        });
+        if (circleRef.current) {
+          gsap.set(circleRef.current, { 
+              strokeDasharray: length, 
+              strokeDashoffset: length,
+              transformOrigin: "50% 50%",
+              rotation: -90
+          });
+        }
 
         tl.to(gridRef.current, {
             opacity: 0.8,

@@ -12,7 +12,7 @@ const projects = [
     type: "AI/CV App", 
     desc: "Best Project Award. AI-powered yoga app that evaluates poses in real time with CV.",
     logo: "/poyo-logo.svg",
-    images: ["/poyo-hero.png", "/poyo-live.png"]
+    images: ["/poyo-hero.svg", "/carousel-1.png"]
   },
   { id: 2, title: "EcoVision", year: "2025", type: "IoT/ML", desc: "AI-powered IoT plastic bottle recycling application for sustainable behavior." },
   { id: 3, title: "COP28 Bhutan", year: "2023", type: "Digital Platform", desc: "Digital platform for Bhutan's COP28 participation under Ministry of Energy." },
